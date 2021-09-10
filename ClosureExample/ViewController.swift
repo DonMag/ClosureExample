@@ -69,8 +69,10 @@ class MyProfileTableViewController: UITableViewController {
 		if indexPath.row == 0 {
 			// first row - use cell with segemented control
 			let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSegmentTableViewCell", for: indexPath) as! ProfileSegmentTableViewCell
+			
 			// set the segemented control's selected index
 			cell.profileSegmentControl.selectedSegmentIndex = self.currentIndex
+			
 			// set the callback closure
 			cell.callback = { [weak self] idx in
 				guard let self = self else {
@@ -81,14 +83,18 @@ class MyProfileTableViewController: UITableViewController {
 				// reload row containing collection view
 				self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
 			}
+			
 			return cell
 		} else if indexPath.row == 1 {
 			// second row - use cell with collection view
 			let cell = tableView.dequeueReusableCell(withIdentifier: "1_2Cell", for: indexPath) as! My_1_2Cell
+			
 			// tell the cell which segment index is selected
 			cell.setData(currentIndex)
+			
 			return cell
 		}
+		
 		// all other rows - use simple Basic cell
 		let cell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as! PlainCell
 		cell.textLabel?.text = "Row \(indexPath.row)"
